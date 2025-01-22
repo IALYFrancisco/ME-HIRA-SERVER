@@ -1,10 +1,14 @@
-import express from 'express'
+import express, { response } from 'express'
 import dotenv from 'dotenv'
 import routes from './src/routes/routes.js'
 
 dotenv.config()
 
 const app = express()
+
+app.get('/', (requet, response) => {
+    response.status(200).json('Welcome to me-hira server 🎵😁')
+})
 
 app.use('/', routes)
 
