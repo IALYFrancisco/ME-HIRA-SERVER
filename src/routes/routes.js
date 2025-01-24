@@ -1,9 +1,8 @@
 import express, { request, response } from "express";
+import getAllSongs from "../services/songServices.js";
 
 const routes = express.Router()
 
-routes.get('/songs', (request, response) => {
-    response.status(200).json('list of songs')
-})
+routes.get('/songs', getAllSongs)
 
 export default routes
