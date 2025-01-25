@@ -1,5 +1,6 @@
 import ChansonCollection from "../models/songsModel.js";
 import dbConnexion from "./dbServices.js";
+import mongoose from "mongoose";
 
 //déconnexion à la base de données
 async function dbDisconnexion() {
