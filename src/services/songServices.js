@@ -1,19 +1,8 @@
 import ChansonCollection from "../models/songsModel.js";
-import dbConnexion from "./dbServices.js";
-import mongoose from "mongoose";
+import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 
-//déconnexion à la base de données
-async function dbDisconnexion() {
-    try {
-        await mongoose.disconnect()
-        console.log('Déconnexion à la base de données réussie.')
-    }catch(error){
-        console.log('Erreur de déconnexion à la base de données: ' + error)
-    }
-}
-
-// résupération de toutes les chansons dans la base de données
-async function getAllSongs(request, response) {
+// récupération de toutes les chansons dans la base de données
+export async function getAllSongs(request, response) {
 
     await dbConnexion()
 
@@ -38,4 +27,7 @@ async function getAllSongs(request, response) {
     
 }
 
-export default getAllSongs
+export function getOneSong(request, response) {
+    console.log(request.query)
+    response.send("OK")   
+}
