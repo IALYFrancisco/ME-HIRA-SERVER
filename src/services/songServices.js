@@ -11,17 +11,15 @@ export async function getSongs(request, response) {
 
     try {
 
-        let allSongs = await ChansonCollection.find({})
+        let songs = await ChansonCollection.find(request.query)
 
-        console.log("Toutes les chansons sont récupérées.")
-
-        if(allSongs == ""){
+        if(songs == ""){
             
-            response.json("Pas de chanson dans la base de données, la collection est vide.")
+            response.status(404).json("Resources doesn't exist")
         
         } else {
             
-            response.status(200).json(allSongs)
+            response.status(200).json(songs)
         
         }
 
@@ -35,39 +33,6 @@ export async function getSongs(request, response) {
     
     }
     
-}
-
-
-// récupération d'une seule chanson
-
-export async function getOneSong(request, response) {
-
-    let songs;
-
-    try {
-
-        await dbConnexion()
-        
-        songs = await ChansonCollection.find(request.query)
-
-        response.set("Content-Type", "application/json")
-
-        response.status(200).json(songs)
-
-     } catch (error) {
-
-        console.log("There are an errors: " + error)
-
-        response.set("Content-Type", "application/json")
-
-        response.status(500).json(error)
-
-    } finally {
-
-        await dbDisconnexion()
-
-    }
-
 }
 
 
