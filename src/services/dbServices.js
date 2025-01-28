@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 // connexion à la base de données
-async function dbConnexion() {
+export async function dbConnexion() {
     try {
         await  mongoose.connect(process.env.DB_URI)
         console.log('Connexion à la base de données réussie')
@@ -10,4 +10,12 @@ async function dbConnexion() {
     }
 }
 
-export default dbConnexion
+//déconnexion à la base de données
+export async function dbDisconnexion() {
+    try {
+        await mongoose.disconnect()
+        console.log('Déconnexion à la base de données réussie.')
+    }catch(error){
+        console.log('Erreur de déconnexion à la base de données: ' + error)
+    }
+}
