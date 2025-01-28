@@ -2,7 +2,9 @@ import ChansonCollection from "../models/songsModel.js";
 
 import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 
+
 // récupération de toutes les chansons dans la base de données
+
 export async function getAllSongs(request, response) {
 
     await dbConnexion()
@@ -35,7 +37,9 @@ export async function getAllSongs(request, response) {
     
 }
 
+
 // récupération d'une seule chanson
+
 export async function getOneSong(request, response) {
 
     let songs;
@@ -66,7 +70,9 @@ export async function getOneSong(request, response) {
 
 }
 
+
 // middelware qui vérifie la validité des paramètres de requête
+
 export function checkQueryParams(request, response, next) {
 
     let validQueryParams = ["_id", "titre", "taille", "duree", "auteur", "fichier_url", "album"]
@@ -80,8 +86,11 @@ export function checkQueryParams(request, response, next) {
     })
     
     if(invalidQueryParams.length > 0) {
+
         return response.status(400).json("Bad request")
+
     }
 
     next()
+    
 }
