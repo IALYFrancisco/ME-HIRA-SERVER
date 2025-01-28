@@ -15,7 +15,7 @@ export async function getSongs(request, response) {
 
         if(songs == ""){
             
-            response.status(404).json("Resources doesn't exist")
+            response.status(404).json("Resources doesn't exist ⏺⏺")
         
         } else {
             
@@ -52,7 +52,7 @@ export function checkQueryParams(request, response, next) {
     
     if(invalidQueryParams.length > 0) {
 
-        return response.status(400).json("Bad request")
+        return response.status(400).json({"Bad request ⛔⛔, the next fields are useless": invalidQueryParams})
 
     }
 
@@ -62,7 +62,7 @@ export function checkQueryParams(request, response, next) {
 
 // ajout d'une chanson
 
-export async function addSong(request, response) {
+export async function addSongs(request, response) {
     
     try {
 

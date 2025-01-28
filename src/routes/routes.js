@@ -1,10 +1,10 @@
-import express, { request, response } from "express";
-import { addSong, checkQueryParams, getOneSong } from "../services/songServices.js";
+import e from "express";
+import { addSongs, checkQueryParams, getSongs } from "../services/songServices.js";
 
-const routes = express.Router()
+const routes = e.Router()
 
 routes.get('/songs', checkQueryParams, getSongs)
 
-routes.post('/song', addSong)
+routes.post('/songs', addSongs)
 
 export default routes
