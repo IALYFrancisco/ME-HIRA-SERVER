@@ -94,3 +94,31 @@ export function checkQueryParams(request, response, next) {
     next()
     
 }
+
+// ajout d'une chanson
+
+export async function addSong(request, response) {
+    
+    try {
+
+        await dbConnexion()
+
+        let newSong = ChansonCollection(request.body)
+
+        await newSong.save()
+
+        response.set('Content-Type', 'application/json')
+
+        response.status(201).json("Resource created successfuly ✅")
+
+    } catch (error) {
+
+        response.status(500).json({"Error creating resource": error})
+
+    } finally {
+
+        await dbDisconnexion()
+
+    }
+
+}
