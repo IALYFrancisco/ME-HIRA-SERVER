@@ -7,6 +7,7 @@ dotenv.config()
 const app = express()
 
 app.get('/', (requet, response) => {
+    response.set('Content-Type', 'application/json')
     response.status(200).json('Welcome to me-hira server 🎵😁')
 })
 
