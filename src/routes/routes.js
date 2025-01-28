@@ -1,9 +1,9 @@
 import express, { request, response } from "express";
-import { addSong, checkQueryParams, getAllSongs, getOneSong } from "../services/songServices.js";
+import { addSong, checkQueryParams, getSongs, getOneSong } from "../services/songServices.js";
 
 const routes = express.Router()
 
-routes.get('/songs', getAllSongs)
+routes.get('/songs', getSongs)
 
 routes.get('/song', checkQueryParams, getOneSong)
 
