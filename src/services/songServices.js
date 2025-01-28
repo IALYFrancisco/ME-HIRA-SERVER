@@ -46,18 +46,42 @@ export async function getOneSong(request, response) {
         
         songs = await ChansonCollection.find(request.query)
 
-        console.log(songs)
+        response.set("Content-Type", "application/json")
+
+        response.status(200).json(songs)
 
      } catch (error) {
 
         console.log("There are an errors: " + error)
+
+        response.set("Content-Type", "application/json")
+
+        response.status(500).json(error)
 
     } finally {
 
         await dbDisconnexion()
 
     }
-    
-    response.send("OK")
 
+}
+
+// middelware qui vérifie la validité des paramètres de requête
+export function checkQueryParams(request, response, next) {
+
+    let validQueryParams = ["_id", "titre", "taille", "duree", "auteur", "fichier_url", "album"]
+
+    let currentQueryParams = Object.keys(request.query)
+    
+    let invalidQueryParams = currentQueryParams.filter((param) => {
+
+        return !validQueryParams.includes(param)
+
+    })
+    
+    if(invalidQueryParams.length > 0) {
+        return response.status(400).json("Bad request")
+    }
+
+    next()
 }
