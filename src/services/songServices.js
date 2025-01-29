@@ -2,24 +2,24 @@ import ChansonCollection from "../models/songsModel.js";
 
 import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 
+
 // récupération de toutes les chansons dans la base de données
-export async function getAllSongs(request, response) {
+
+export async function getSongs(request, response) {
 
     await dbConnexion()
 
     try {
 
-        let allSongs = await ChansonCollection.find({})
+        let songs = await ChansonCollection.find(request.query)
 
-        console.log("Toutes les chansons sont récupérées.")
-
-        if(allSongs == ""){
+        if(songs == ""){
             
-            response.json("Pas de chanson dans la base de données, la collection est vide.")
+            response.status(404).json("Resources doesn't exist ⏺⏺")
         
         } else {
             
-            response.status(200).json(allSongs)
+            response.status(200).json(songs)
         
         }
 
@@ -35,29 +35,55 @@ export async function getAllSongs(request, response) {
     
 }
 
-// récupération d'une seule chanson
-export async function getOneSong(request, response) {
 
-    let songs;
+// middelware qui vérifie la validité des paramètres de requête
 
+export function checkQueryParams(request, response, next) {
+
+    let validQueryParams = ["_id", "titre", "taille", "duree", "auteur", "fichier_url", "album"]
+
+    let currentQueryParams = Object.keys(request.query)
+    
+    let invalidQueryParams = currentQueryParams.filter((param) => {
+
+        return !validQueryParams.includes(param)
+
+    })
+    
+    if(invalidQueryParams.length > 0) {
+
+        return response.status(400).json({"Bad request ⛔⛔, the next fields are useless": invalidQueryParams})
+
+    }
+
+    next()
+    
+}
+
+// ajout d'une chanson
+
+export async function addSongs(request, response) {
+    
     try {
 
         await dbConnexion()
-        
-        songs = await ChansonCollection.find(request.query)
 
-        console.log(songs)
+        let newSong = ChansonCollection(request.body)
 
-     } catch (error) {
+        await newSong.save()
 
-        console.log("There are an errors: " + error)
+        response.set('Content-Type', 'application/json')
+
+        response.status(201).json("Resource created successfuly ✅")
+
+    } catch (error) {
+
+        response.status(500).json({"Error creating resource": error})
 
     } finally {
 
         await dbDisconnexion()
 
     }
-    
-    response.send("OK")
 
 }
