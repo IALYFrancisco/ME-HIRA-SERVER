@@ -2,7 +2,7 @@ import e from 'express'
 
 import dotenv from 'dotenv'
 
-import routes from './src/routes/routes.js'
+import { song_routes } from './src/routes/routes.js'
 
 dotenv.config()
 
@@ -18,10 +18,6 @@ app.get('/', (requet, response) => {
 
 })
 
-app.use('/', routes)
+app.use('/song', song_routes)
 
-app.listen(process.env.APP_PORT, ()=>{
-
-    console.log('http://127.0.0.1:3000')
-
-})
+app.listen(process.env.APP_PORT, ()=>{console.log(`The application is listening at ${process.env.APP_HOST}`)})
