@@ -1,4 +1,4 @@
-import ChansonCollection from "../models/songsModel.js";
+import ChansonCollection from "../models/Song.js";
 
 import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 
