@@ -1,4 +1,4 @@
-import Song from "../models/Song.js";
+import { Song } from "../models/Song.js";
 
 import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 
