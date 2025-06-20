@@ -1,36 +1,18 @@
 import { Song } from "../models/Song.js";
-
 import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 
-
-// récupération de toutes les chansons dans la base de données
-
 export async function getSong(request, response) {
-
     await dbConnexion()
-
     try {
-
-        let songs = await Song.find(request.query)
-
-        if(songs == ""){
-            
-            response.status(404).json("Resources doesn't exist ⏺⏺")
-        
-        } else {
-            
-            response.status(200).json(songs)
-        
-        }
-
-        await dbDisconnexion()
-
+        let songs = await Song.find()
+        response.status(200).json({
+            message: "List of song.",
+            data: songs
+        })
     } catch (error) {
-        
         console.log("Erreur de récupération de toutes les chansons: " + error)
-
+    }finally {
         await dbDisconnexion()
-    
     }
     
 }
