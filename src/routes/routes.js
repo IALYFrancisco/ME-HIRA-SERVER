@@ -1,5 +1,5 @@
 import e from "express";
-import { addSongs, checkQueryParams, getSongs } from "../services/songServices.js";
+import { addSongs, checkQueryParams, getSongs } from "../services/Song.js";
 
 const routes = e.Router()
 
