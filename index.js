@@ -2,7 +2,7 @@ import e from 'express'
 
 import dotenv from 'dotenv'
 
-import routes from './src/routes/routes.js'
+import { routes } from './src/routes/routes.js'
 
 dotenv.config()
 
