@@ -5,7 +5,7 @@ import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 
 // récupération de toutes les chansons dans la base de données
 
-export async function getSongs(request, response) {
+export async function getSong(request, response) {
 
     await dbConnexion()
 
