@@ -1,4 +1,4 @@
-import ChansonCollection from "../models/Song.js";
+import Song from "../models/Song.js";
 
 import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 
@@ -11,7 +11,7 @@ export async function getSong(request, response) {
 
     try {
 
-        let songs = await ChansonCollection.find(request.query)
+        let songs = await Song.find(request.query)
 
         if(songs == ""){
             
@@ -68,7 +68,7 @@ export async function addSongs(request, response) {
 
         await dbConnexion()
 
-        let newSong = ChansonCollection(request.body)
+        let newSong = Song(request.body)
 
         await newSong.save()
 
