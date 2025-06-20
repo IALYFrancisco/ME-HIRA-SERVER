@@ -17,9 +17,6 @@ export async function getSong(request, response) {
     
 }
 
-
-// middelware qui vérifie la validité des paramètres de requête
-
 export function checkQueryParams(request, response, next) {
 
     let validQueryParams = ["_id", "titre", "taille", "duree", "auteur", "fichier_url", "album"]
