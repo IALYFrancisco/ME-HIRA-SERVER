@@ -42,8 +42,6 @@ export function checkQueryParams(request, response, next) {
     
 }
 
-// ajout d'une chanson
-
 export async function addSong(request, response) {
     try {
         await dbConnexion()
