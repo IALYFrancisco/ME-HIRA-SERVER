@@ -18,25 +18,15 @@ export async function getSong(request, response) {
 }
 
 export function checkQueryParams(request, response, next) {
-
     let validQueryParams = ["_id", "titre", "taille", "duree", "auteur", "fichier_url", "album"]
-
     let currentQueryParams = Object.keys(request.query)
-    
     let invalidQueryParams = currentQueryParams.filter((param) => {
-
         return !validQueryParams.includes(param)
-
     })
-    
     if(invalidQueryParams.length > 0) {
-
         return response.status(400).json({"Bad request ⛔⛔, the next fields are useless": invalidQueryParams})
-
     }
-
     next()
-    
 }
 
 export async function addSong(request, response) {
