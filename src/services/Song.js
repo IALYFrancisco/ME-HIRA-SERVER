@@ -5,9 +5,8 @@ export async function get_song(request, response) {
         let songs = await Song.find({}, {__v: 0})
         response.status(200).json(songs)
     } catch (error) {
-        console.log("Erreur de récupération de toutes les chansons: " + error)
+        response.status(500).end()
     }
-    
 }
 
 export function checkQueryParams(request, response, next) {
