@@ -1,10 +1,7 @@
 import mongoose from "mongoose"
 
-export async function dbConnexion() {
-    try {
-        await  mongoose.connect(process.env.DB_URI)
-        console.log('Connexion à la base de données réussie')
-    }catch(error){
-        console.log("Erreur de connexion à la base de données: " + error)
-    }
+export function db_connection() {
+    mongoose.connect(process.env.DB_URI)
+    .then(()=>console.log('Database connection succefully.'))
+    .catch(()=>console.log('Database connection error.'))
 }

@@ -1,8 +1,6 @@
-import { Song } from "../models/Song.js";
-import { dbConnexion } from "./database.js";
+import { Song } from "../models/Song.js"
 
 export async function getSong(request, response) {
-    await dbConnexion()
     try {
         let songs = await Song.find({}, {__v: 0})
         response.status(200).json(songs)
@@ -26,7 +24,6 @@ export function checkQueryParams(request, response, next) {
 
 export async function addSong(request, response) {
     try {
-        await dbConnexion()
         let newSong = Song(request.body)
         await newSong.save()
         response.set('Content-Type', 'application/json')
