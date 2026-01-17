@@ -8,12 +8,3 @@ export async function dbConnexion() {
         console.log("Erreur de connexion à la base de données: " + error)
     }
 }
-
-export async function dbDisconnexion() {
-    try {
-        await mongoose.disconnect()
-        console.log('Déconnexion à la base de données réussie.')
-    }catch(error){
-        console.log('Erreur de déconnexion à la base de données: ' + error)
-    }
-}

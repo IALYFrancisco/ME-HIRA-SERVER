@@ -1,5 +1,5 @@
 import { Song } from "../models/Song.js";
-import { dbConnexion, dbDisconnexion } from "./database.js";
+import { dbConnexion } from "./database.js";
 
 export async function getSong(request, response) {
     await dbConnexion()
@@ -8,8 +8,6 @@ export async function getSong(request, response) {
         response.status(200).json(songs)
     } catch (error) {
         console.log("Erreur de récupération de toutes les chansons: " + error)
-    }finally {
-        await dbDisconnexion()
     }
     
 }
@@ -35,7 +33,5 @@ export async function addSong(request, response) {
         response.status(201).json("Resource created successfuly ✅")
     } catch (error) {
         response.status(500).json({"Error creating resource": error})
-    } finally {
-        await dbDisconnexion()
     }
 }
