@@ -1,4 +1,4 @@
-import { Song } from "../models/Song.js"
+import { Song } from "../models/song.js"
 
 export async function get_song(request, response) {
     try {
