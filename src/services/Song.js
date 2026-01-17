@@ -1,5 +1,5 @@
 import { Song } from "../models/Song.js";
-import { dbConnexion, dbDisconnexion } from "./dbServices.js";
+import { dbConnexion, dbDisconnexion } from "./database.js";
 
 export async function getSong(request, response) {
     await dbConnexion()
