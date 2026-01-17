@@ -27,4 +27,4 @@ app.get('/', (requet, response) => {
 
 app.use('/song', song_routes)
 
-app.listen(process.env.APP_PORT, ()=>{console.log(`The application is listening at ${process.env.APP_HOST}`)})
+app.listen(3000, ()=>{console.log(`The application is running at ${process.env.APP_HOST}`)})
