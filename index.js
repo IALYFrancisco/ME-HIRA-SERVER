@@ -2,7 +2,7 @@ import e from 'express'
 
 import dotenv from 'dotenv'
 
-import { song_routes } from './src/routes/routes.js'
+import { song_routes } from './src/routes/song.js'
 
 dotenv.config()
 
