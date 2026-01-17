@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addSong, checkQueryParams, getSong } from "../services/Song.js";
+import { addSong, checkQueryParams, getSong } from "../services/song.js";
 
 export const song_router = Router()
 
