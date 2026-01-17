@@ -1,8 +1,7 @@
 import e from 'express'
 
 import dotenv from 'dotenv'
-
-import { song_routes } from './src/routes/song.js'
+import { app_router } from './src/routes/index.js'
 
 dotenv.config()
 
@@ -17,14 +16,6 @@ app.use((request, response, next) => {
     next();
 })
 
-app.get('/', (requet, response) => {
-
-    response.set('Content-Type', 'application/json')
-
-    response.status(200).json('Welcome to me-hira server 🎵😁')
-
-})
-
-app.use('/song', song_routes)
+app.use(app_router)
 
 app.listen(3000, ()=>{console.log(`The application is running at ${process.env.APP_HOST}`)})
