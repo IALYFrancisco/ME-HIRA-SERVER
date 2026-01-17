@@ -4,11 +4,8 @@ import { dbConnexion, dbDisconnexion } from "./dbServices.js";
 export async function getSong(request, response) {
     await dbConnexion()
     try {
-        let songs = await Song.find()
-        response.status(200).json({
-            message: "List of song.",
-            data: songs
-        })
+        let songs = await Song.find({}, {__v: 0})
+        response.status(200).json(songs)
     } catch (error) {
         console.log("Erreur de récupération de toutes les chansons: " + error)
     }finally {
