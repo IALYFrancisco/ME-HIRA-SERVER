@@ -1,6 +1,6 @@
 import { Song } from "../models/Song.js"
 
-export async function getSong(request, response) {
+export async function get_song(request, response) {
     try {
         let songs = await Song.find({}, {__v: 0})
         response.status(200).json(songs)
