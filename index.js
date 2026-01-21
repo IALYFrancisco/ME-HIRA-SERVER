@@ -1,30 +1,19 @@
 import e from 'express'
+import { config } from 'dotenv'
+import { app_router } from './src/routes/index.js'
+import { cors_configuration } from './src/services/cors.js'
+import { db_connection } from './src/services/database.js'
 
-import dotenv from 'dotenv'
-
-import { song_routes } from './src/routes/routes.js'
-
-dotenv.config()
+config()
 
 const app = e()
 
 app.use(e.json())
 
-app.use((request, response, next) => {
-    response.setHeader('Access-Control-Allow-Origin', '*');
-    response.setHeader('Access-Control-Allow-Headers', '*');
-    response.setHeader('Access-Control-Allow-Methods', '*')
-    next();
-})
+app.use(cors_configuration)
 
-app.get('/', (requet, response) => {
+db_connection()
 
-    response.set('Content-Type', 'application/json')
+app.use(app_router)
 
-    response.status(200).json('Welcome to me-hira server 🎵😁')
-
-})
-
-app.use('/song', song_routes)
-
-app.listen(process.env.APP_PORT, ()=>{console.log(`The application is listening at ${process.env.APP_HOST}`)})
+app.listen(3000, ()=>{console.log(`The application is running at ${process.env.APP_HOST}`)})

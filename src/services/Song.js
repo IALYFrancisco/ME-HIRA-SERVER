@@ -1,20 +1,12 @@
-import { Song } from "../models/Song.js";
-import { dbConnexion, dbDisconnexion } from "./dbServices.js";
+import { Song } from "../models/song.js"
 
-export async function getSong(request, response) {
-    await dbConnexion()
+export async function get_song(request, response) {
     try {
-        let songs = await Song.find()
-        response.status(200).json({
-            message: "List of song.",
-            data: songs
-        })
+        let songs = await Song.find({}, {__v: 0})
+        response.status(200).json(songs)
     } catch (error) {
-        console.log("Erreur de récupération de toutes les chansons: " + error)
-    }finally {
-        await dbDisconnexion()
+        response.status(500).end()
     }
-    
 }
 
 export function checkQueryParams(request, response, next) {
@@ -31,14 +23,11 @@ export function checkQueryParams(request, response, next) {
 
 export async function addSong(request, response) {
     try {
-        await dbConnexion()
         let newSong = Song(request.body)
         await newSong.save()
         response.set('Content-Type', 'application/json')
         response.status(201).json("Resource created successfuly ✅")
     } catch (error) {
         response.status(500).json({"Error creating resource": error})
-    } finally {
-        await dbDisconnexion()
     }
 }
